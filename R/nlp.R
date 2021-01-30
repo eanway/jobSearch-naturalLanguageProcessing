@@ -21,7 +21,8 @@ summary(corp_desc)
 
 tok_desc <- corp_desc %>%
   tokens(remove_punct = TRUE) %>%
-  tokens_remove(pattern = stopwords("en"), padding = TRUE)
+  tokens_remove(pattern = stopwords("en"), padding = TRUE) %>%
+  tokens_wordstem()
 
 print(tok_desc)
 
@@ -44,4 +45,4 @@ fcm_desc <- dfm_desc %>%
   fcm() %>%
   topfeatures()
 
-fcm_desc
+print(fcm_desc)
