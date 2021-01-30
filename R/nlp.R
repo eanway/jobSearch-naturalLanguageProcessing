@@ -30,6 +30,8 @@ col_desc <- tok_desc %>%
   textstat_collocations() %>%
   filter(z > 3)
 
+head(col_desc)
+
 tok_comp_desc <- tok_desc %>%
   tokens_compound(col_desc)
 
@@ -41,8 +43,18 @@ print(dfm_desc)
 dfm_desc %>%
   topfeatures()
 
-fcm_desc <- dfm_desc %>%
-  fcm() %>%
-  topfeatures()
+dfm_desc %>%
+  textstat_dist() %>%
+  as.dist() %>%
+  hclust() %>%
+  plot()
 
-print(fcm_desc)
+fcm_desc <- dfm_desc %>%
+  fcm()
+
+fcm_desc %>%
+  topfeatures(20)
+
+fcm_desc %>%
+  textstat_frequency() %>%
+  head(20)
